@@ -8,3 +8,4 @@ class User(Base):
 
     id = Column(BIGINT, nullable=False, primary_key=True)
     name = Column(TEXT, nullable=True)
+    connected_at = Column(TEXT, nullable=True)
