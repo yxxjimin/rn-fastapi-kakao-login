@@ -19,3 +19,22 @@ sequenceDiagram
     D ->>- F: Retrieve username
     F ->>- R: Username
 ```
+
+### Request Formats
+**1. React Native to FastAPI**
+
+Pass access token received from Kakao authorization server to FastAPI via POST method.
+```json
+{
+    "access_token": (token_value)
+}
+```
+
+**2. FastAPI to Kakao API**
+
+Fetch user information from Kakao API server via GET method and include headers in the below.
+
+|Key|Value|
+|-|-|
+|Authorization|`{token_value}`|
+|Content-Type|`application/x-www-form-urlencoded;charset=utf-8`|
