@@ -1,27 +1,21 @@
 React Native / FastAPI demo project for testing [Kakao Login](https://developers.kakao.com/docs/latest/ko/kakaologin/common#intro) with [@react-native-seoul/kakao-login](https://github.com/crossplatformkorea/react-native-kakao-login).
 
 ## Flow
-(TBA)
+```mermaid
+sequenceDiagram
+    participant R as React Native
+    participant F as FastAPI
+    participant AU as Kakao Auth
+    participant AP as Kakao API
+    participant D as Database
 
-## Getting Started
-Refer to [@react-native-seoul/kakao-login](https://github.com/crossplatformkorea/react-native-kakao-login#getting-started) for more details.
+    R ->>+ AU: Request Kakao Login
+    AU ->>- R: Return Access Token
 
-### iOS
-**1. Register Platform**
-
-From [Kakao Developers console](https://developers.kakao.com/console/), register iOS platform and specify the bundle identifier.
-
-**2. Configure `Info.plist`**
-
-Add some settings to `Info.plist`. Note the differences in `<string>kakao{카카오 네이티브앱 키}</string>` and `<string>{카카오 네이티브앱 키}</string>`.
-
-**3. Create Swift Bridging Header**
-
-Create `SwiftBridge.swift` and edit `AppDelegate.mm`.
-
-**4. Install Pods**
-
-```bash
-cd ios
-pod install
+    R ->>+ F: POST /login/
+    F ->>+ AP: GET https://kapi.kakao.com/v2/user/me/
+    AP ->>- F: { "id": int, "connected_at": str }
+    F ->>+ D: Find user by ID
+    D ->>- F: Retrieve username
+    F ->>- R: Username
 ```
