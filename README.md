@@ -26,7 +26,7 @@ sequenceDiagram
 Pass access token received from Kakao authorization server to FastAPI via POST method.
 ```json
 {
-    "access_token": (token_value)
+    "access_token": "{token_value}"
 }
 ```
 
@@ -36,5 +36,5 @@ Fetch user information from Kakao API server via GET method and include headers 
 
 |Key|Value|
 |-|-|
-|Authorization|`{token_value}`|
+|Authorization|`Bearer {token_value}`|
 |Content-Type|`application/x-www-form-urlencoded;charset=utf-8`|
