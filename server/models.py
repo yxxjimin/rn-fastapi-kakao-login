@@ -1,11 +1,30 @@
-from sqlalchemy import Column, TEXT, BIGINT
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, Float
+from sqlalchemy.sql import func
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-class User(Base):
-    __tablename__ = "user"
+class Users(Base):
+    __tablename__ = "users"
 
-    id = Column(BIGINT, nullable=False, primary_key=True)
-    name = Column(TEXT, nullable=True)
-    connected_at = Column(TEXT, nullable=True)
+    user_id = Column(Integer, primary_key= True, index = True)
+    user_kakaotalk = Column(String)
+    user_name = Column(String)
+    bot_name = Column(String)
+    bot_color = Column(String)
+    survey_question_one = Column(String)
+    survey_question_two = Column(String)
+    survey_question_three = Column(String)
+    survey_question_four = Column(String)
+
+class Chatting(Base):
+    __tablename__ = "chattings"
+
+    chatting_id = Column(Integer, primary_key = True, index = True)
+    user_id = Column(Integer, ForeignKey("users.user_id"))
+    chatting_date = Column(Date, default=func.now())
+    message_first = Column(String)
+    message_model = Column(String)
+    emotion_one = Column(String)
+    emotion_two = Column(String)
+    emotion_intensity = Column(Float)

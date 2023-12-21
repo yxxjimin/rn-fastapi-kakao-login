@@ -1,17 +1,17 @@
 import sqlalchemy, sqlalchemy.orm
-from models import User
+from models import Users
 
 USERNAME = 'root'
-PASSWORD = 'root'
+PASSWORD = '1234'
 HOST = 'localhost'
-PORT = 8101
+PORT = 3306
 DATABASE = 'mindbut'
 DB_URL = f'mysql+pymysql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}'
 
 class EngineConnection:
     def __init__(self):
         self.engine = sqlalchemy.create_engine(DB_URL, echo=True)
-        User.__table__.create(bind=self.engine, checkfirst=True)
+        Users.__table__.create(bind=self.engine, checkfirst=True)
 
     def sessionmaker(self):
         Session = sqlalchemy.orm.sessionmaker(bind=self.engine)
